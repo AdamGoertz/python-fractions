@@ -1,6 +1,6 @@
 Class implementation supporting a fraction data type for Python 3.
 
-Object can be instantiated as
+fraction objects can be instantiated as
 
     frac(numerator, denominator)
 
