@@ -140,7 +140,10 @@ class frac:
     # will be defined automatically, for example x < y <==> y > x
 
     def __eq__(self, other):
-        return (self.numer * other.denom) == (self.denom * other.numer)
+        if isinstance(other, frac):
+            return (self.numer * other.denom) == (self.denom * other.numer)
+        elif isinstance(other, int):
+            return (self.numer // self.denom) == other
 
     def __ne__(self, other):
         return not (self == other)
