@@ -10,7 +10,7 @@ class frac:
 
 
     def __repr__(self):
-        return f'frac(numerator={self.numer}, denominator={self.denom})'
+        return f'frac({self.numer}, {self.denom})'
 
 
     def __str__(self):
@@ -47,6 +47,13 @@ class frac:
         gcd = frac._gcd(self.numer, self.denom)
 
         return frac(self.numer // gcd, self.denom // gcd)
+
+
+    def get_proper(self):
+        coeff = self.numer // self.denom
+        pfrac = self.numer % self.denom
+
+        return (coeff, frac(pfrac, self.denom).simplify())
 
 
     #Addition ==================================================================
@@ -168,3 +175,6 @@ class frac:
 
     def __bool__(self):
         return self.numer != 0
+
+a = frac(30,8)
+print(a.get_proper())
