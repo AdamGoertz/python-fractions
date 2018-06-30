@@ -40,10 +40,7 @@ class frac:
 
 
     def reciprocal(self):
-        if self.numer != 0:
-            return frac(self.denom, self.numer)
-        else:
-            raise ValueError("denominator cannot be 0.")
+        return frac(self.denom, self.numer)
 
 
     def simplify(self):
