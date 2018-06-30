@@ -49,26 +49,22 @@ class frac:
     def simplify(self):
         gcd = frac._gcd(self.numer, self.denom)
 
-        if gcd != 1:
-            return frac(self.numer // gcd, self.denom // gcd)
-        else:
-            return self
+        return frac(self.numer // gcd, self.denom // gcd)
+
 
     #Addition ==================================================================
 
     def __add__(self, other):
         if isinstance(other, frac):
             d = frac._lcm(self.denom, other.denom)
-            p2 = d // other.denom
-            n2 = p2 * other.numer
+            n2 = (d // other.denom) * other.numer
+
         elif isinstance(other, int):
-            d = self.denom
-            n2 = other * d
+            n2 = other * self.denom
         else:
             raise TypeError("Second operand must be frac() object or int.")
 
-        p1 = d // self.denom
-        n1 = p1 * self.numer
+        n1 = (d // self.denom) * self.numer
 
         return frac((n1 + n2), d).simplify()
 
