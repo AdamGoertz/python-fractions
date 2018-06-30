@@ -68,7 +68,7 @@ class frac:
     def __radd__(self,other):
         return self + other
 
-    def __iadd(self, other):
+    def __iadd__(self, other):
         self = self + other
 
     # Subtraction ==============================================================
