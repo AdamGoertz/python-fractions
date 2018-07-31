@@ -1,3 +1,20 @@
+"""
+Copyright (C) 2018  Adam Goertz
+
+This program is free software: you may redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but without any guarantee of its fitness for any particular purpose. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+"""
+
+
 class frac:
     def __init__(self, numer, denom=1):
         assert (isinstance(numer, int) and isinstance(denom, int))
