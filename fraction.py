@@ -34,8 +34,9 @@ class frac:
 
     # Auiliary Methods =========================================================
     @staticmethod
-    def to_fraction(decimal):
+    def to_fraction(decimal : float) -> frac:
         """Converts decimal values into 'frac' objects."""
+
         magnitude = 1
         while (decimal // 1) != decimal:
             decimal *= 10
@@ -43,8 +44,18 @@ class frac:
         return frac(int(decimal), magnitude).simplify()
 
     @staticmethod
+    def to_float(fraction : frac) -> float:
+        """Converts frac object to floating-point representation."""
+
+        if isinstance(fracion, frac):
+            return fraction.numer / fraction.denom
+        else
+            raise TypeError("argument must be of type 'frac'.")
+
+    @staticmethod
     def _gcd(n1, n2):
-        """Euclidean algorithm for finding greatest common divisor"""
+        """Euclidean algorithm for finding greatest common divisor."""
+
         d1 = abs(n1)
         d2 = abs(n2)
 
@@ -64,6 +75,7 @@ class frac:
     @staticmethod
     def _lcm(n1, n2):
         """Returns the least common multiple of two integers."""
+
         return (n1 // frac._gcd(n1, n2)) * n2
 
 
@@ -79,6 +91,7 @@ class frac:
 
     def get_proper(self):
         """Returns the fraction as a tuple containing an integer and a proper fraction."""
+
         coeff = self.numer // self.denom
         pfrac = self.numer % self.denom
 
