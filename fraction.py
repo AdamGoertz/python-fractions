@@ -76,15 +76,16 @@ class frac:
             n2 = (d // other.denom) * other.numer
 
         elif isinstance(other, int):
-            n2 = other * self.denom
+            d = self.denom
+            n2 = other * d
         else:
-            raise TypeError("Second operand must be 'frac' object or int.")
+            raise TypeError("operands must be of type 'frac' or 'int'.")
 
         n1 = (d // self.denom) * self.numer
 
         return frac((n1 + n2), d).simplify()
 
-    def __radd__(self,other):
+    def __radd__(self, other):
         return self + other
 
     def __iadd__(self, other):
@@ -109,7 +110,7 @@ class frac:
         elif isinstance(other, int):
             return frac(self.numer * other, self.denom).simplify()
         else:
-            raise TypeError("Second argument must be frac() object or int.")
+            raise TypeError("operands must be of type 'frac' or 'int'.")
 
     def __rmul__(self, other):
         return self * other
@@ -163,6 +164,8 @@ class frac:
             return (self.numer * other.denom) == (self.denom * other.numer)
         elif isinstance(other, int):
             return (self.numer // self.denom) == other
+        else
+            raise TypeError("operands must be of type 'frac' or 'int'.")
 
     def __ne__(self, other):
         return not (self == other)
@@ -172,6 +175,8 @@ class frac:
             return (self.numer * other.denom) < (self.denom * other.numer)
         elif isinstance(other, int):
             return (self.numer // self.denom) < other
+        else
+            raise TypeError("operands must be of type 'frac' or 'int'.")
 
     def __le__(self, other):
         return self < other or self == other
@@ -181,6 +186,8 @@ class frac:
             return (self.numer * other.denom) > (self.denom * other.numer)
         elif isinstance(other, int):
             return (self.numer // self.denom) > other
+        else
+            raise TypeError("operands must be of type 'frac' or 'int'.")
 
     def __ge__(self, other):
         return self > other or self == other
