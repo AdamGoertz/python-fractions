@@ -1,9 +1,11 @@
-Class implementation supporting a fraction data type for Python 3.
+# Python Fractions:
+
+Creates a fraction data type for use with Python 3.
 
 fraction objects can be instantiated as
 
     fraction.frac(numerator, denominator)
 
-and support all relevant arithmetic methods and operators.
+frac objects support all relevant arithmetic and comparison operators, as well as methods to simplify and convert between floating point numbers and fractional representations.
 
-If you believe functionality is missing, or if you find an error, please submit an issue, or add the functionality and submit a pull request.
+If you believe functionality is missing, or if you find an error, please submit an issue.
