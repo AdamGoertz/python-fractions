@@ -15,7 +15,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 """
 
 
-class frac:
+class fraction:
     def __init__(self, numer, denom=1):
         assert (isinstance(numer, int) and isinstance(denom, int))
 
@@ -26,7 +26,7 @@ class frac:
             self.denom = denom
 
     def __repr__(self):
-        return f'frac({self.numer}, {self.denom})'
+        return f'fraction({self.numer}, {self.denom})'
 
 
     def __str__(self):
@@ -34,23 +34,23 @@ class frac:
 
     # Auiliary Methods =========================================================
     @staticmethod
-    def to_fraction(decimal : float) -> frac:
-        """Converts decimal values into 'frac' objects."""
+    def to_fraction(decimal):
+        """Converts decimal values into 'fraction' objects."""
 
         magnitude = 1
         while (decimal // 1) != decimal:
             decimal *= 10
             magnitude *= 10
-        return frac(int(decimal), magnitude).simplify()
+        return fraction(int(decimal), magnitude).simplify()
 
     @staticmethod
-    def to_float(fraction : frac) -> float:
-        """Converts frac object to floating-point representation."""
+    def to_float(frac):
+        """Converts fraction object to floating-point representation."""
 
         if isinstance(fracion, frac):
-            return fraction.numer / fraction.denom
-        else
-            raise TypeError("argument must be of type 'frac'.")
+            return frac.numer / frac.denom
+        else:
+            raise TypeError("argument must be of type 'fraction'.")
 
     @staticmethod
     def _gcd(n1, n2):
@@ -76,17 +76,17 @@ class frac:
     def _lcm(n1, n2):
         """Returns the least common multiple of two integers."""
 
-        return (n1 // frac._gcd(n1, n2)) * n2
+        return (n1 // fraction._gcd(n1, n2)) * n2
 
 
     def reciprocal(self):
-        return frac(self.denom, self.numer)
+        return fraction(self.denom, self.numer)
 
 
     def simplify(self):
-        gcd = frac._gcd(self.numer, self.denom)
+        gcd = fraction._gcd(self.numer, self.denom)
 
-        return frac(self.numer // gcd, self.denom // gcd)
+        return fraction(self.numer // gcd, self.denom // gcd)
 
 
     def get_proper(self):
@@ -95,25 +95,25 @@ class frac:
         coeff = self.numer // self.denom
         pfrac = self.numer % self.denom
 
-        return (coeff, frac(pfrac, abs(self.denom)).simplify())
+        return (coeff, fraction(pfrac, abs(self.denom)).simplify())
 
 
     #Addition ==================================================================
 
     def __add__(self, other):
-        if isinstance(other, frac):
-            d = frac._lcm(self.denom, other.denom)
+        if isinstance(other, fraction):
+            d = fraction._lcm(self.denom, other.denom)
             n2 = (d // other.denom) * other.numer
 
         elif isinstance(other, int):
             d = self.denom
             n2 = other * d
         else:
-            raise TypeError("operands must be of type 'frac' or 'int'.")
+            raise TypeError("operands must be of type 'fraction' or 'int'.")
 
         n1 = (d // self.denom) * self.numer
 
-        return frac((n1 + n2), d).simplify()
+        return fraction((n1 + n2), d).simplify()
 
     def __radd__(self, other):
         return self + other
@@ -135,12 +135,12 @@ class frac:
     # Multiplication ===========================================================
 
     def __mul__(self, other):
-        if isinstance(other, frac):
-            return frac(self.numer * other.numer, self.denom * other.denom).simplify()
+        if isinstance(other, fraction):
+            return fraction(self.numer * other.numer, self.denom * other.denom).simplify()
         elif isinstance(other, int):
-            return frac(self.numer * other, self.denom).simplify()
+            return fraction(self.numer * other, self.denom).simplify()
         else:
-            raise TypeError("operands must be of type 'frac' or 'int'.")
+            raise TypeError("operands must be of type 'fraction' or 'int'.")
 
     def __rmul__(self, other):
         return self * other
@@ -165,7 +165,7 @@ class frac:
         return self * -1
 
     def __abs__(self):
-        return frac(abs(self.numer), abs(self.denom))
+        return fraction(abs(self.numer), abs(self.denom))
 
     def __float__(self):
         return self.numer / self.denom
@@ -190,34 +190,34 @@ class frac:
     # will be defined automatically, for example x < y <==> y > x
 
     def __eq__(self, other):
-        if isinstance(other, frac):
+        if isinstance(other, fraction):
             return (self.numer * other.denom) == (self.denom * other.numer)
         elif isinstance(other, int):
             return (self.numer // self.denom) == other
-        else
-            raise TypeError("operands must be of type 'frac' or 'int'.")
+        else:
+            raise TypeError("operands must be of type 'fraction' or 'int'.")
 
     def __ne__(self, other):
         return not (self == other)
 
     def __lt__(self, other):
-        if isinstance(other, frac):
+        if isinstance(other, fraction):
             return (self.numer * other.denom) < (self.denom * other.numer)
         elif isinstance(other, int):
             return (self.numer // self.denom) < other
-        else
-            raise TypeError("operands must be of type 'frac' or 'int'.")
+        else:
+            raise TypeError("operands must be of type 'fraction' or 'int'.")
 
     def __le__(self, other):
         return self < other or self == other
 
     def __gt__(self, other):
-        if isinstance(other, frac):
+        if isinstance(other, fraction):
             return (self.numer * other.denom) > (self.denom * other.numer)
         elif isinstance(other, int):
             return (self.numer // self.denom) > other
-        else
-            raise TypeError("operands must be of type 'frac' or 'int'.")
+        else:
+            raise TypeError("operands must be of type 'fraction' or 'int'.")
 
     def __ge__(self, other):
         return self > other or self == other
