@@ -17,10 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 class fraction:
     def __init__(self, numer, denom=1):
-        assert (isinstance(numer, int) and isinstance(denom, int))
+        if not (isinstance(numer, int) and isinstance(denom, int)):
+            raise TypeError("fraction objects must be instatiated with integer arguments.")
 
         if (denom == 0):
             raise ValueError("denominator cannot be 0.")
+
         else:
             self.numer = numer
             self.denom = denom
@@ -28,14 +30,13 @@ class fraction:
     def __repr__(self):
         return f'fraction({self.numer}, {self.denom})'
 
-
     def __str__(self):
         return f'{self.numer}/{self.denom}'
 
     # Auiliary Methods =========================================================
     @staticmethod
     def to_fraction(decimal):
-        """Converts decimal values into 'fraction' objects."""
+        """Converts a decimal value into a 'fraction' object."""
 
         magnitude = 1
         while (decimal // 1) != decimal:
@@ -45,12 +46,21 @@ class fraction:
 
     @staticmethod
     def to_float(frac):
-        """Converts fraction object to floating-point representation."""
+        """Converts a fraction object to floating-point representation."""
 
         if isinstance(fracion, frac):
             return frac.numer / frac.denom
         else:
             raise TypeError("argument must be of type 'fraction'.")
+
+    @staticmethod
+    def get_proper(frac):
+        """Returns the fraction as a tuple containing an integer and a proper fraction."""
+
+        coeff = frac.numer // frac.denom
+        pfrac = frac.numer % frac.denom
+
+        return (coeff, fraction(pfrac, abs(frac.denom)).simplify())
 
     @staticmethod
     def _gcd(n1, n2):
@@ -88,14 +98,6 @@ class fraction:
 
         return fraction(self.numer // gcd, self.denom // gcd)
 
-
-    def get_proper(self):
-        """Returns the fraction as a tuple containing an integer and a proper fraction."""
-
-        coeff = self.numer // self.denom
-        pfrac = self.numer % self.denom
-
-        return (coeff, fraction(pfrac, abs(self.denom)).simplify())
 
 
     #Addition ==================================================================
