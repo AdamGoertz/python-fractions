@@ -42,7 +42,7 @@ class fraction:
 
     # Auiliary Methods =========================================================
     @staticmethod
-    def to_fraction(decimal):
+    def to_fraction(decimal : float) -> 'fraction':
         """Converts a decimal value into a 'fraction' object."""
 
         magnitude = 1
@@ -53,7 +53,7 @@ class fraction:
         return fraction(int(decimal), magnitude).simplify()
 
 
-    def to_float(self):
+    def to_float(self) -> float:
         """Converts a fraction object to floating-point representation."""
 
         return self.numer / self.denom
@@ -68,7 +68,7 @@ class fraction:
         return (coeff, fraction(pfrac, abs(self.denom)).simplify())
 
     @staticmethod
-    def _gcd(n1, n2):
+    def _gcd(n1 : int, n2 : int) -> int:
         """Euclidean algorithm for finding greatest common divisor."""
 
         d1 = abs(n1)
@@ -88,7 +88,7 @@ class fraction:
 
 
     @staticmethod
-    def _lcm(n1, n2):
+    def _lcm(n1 : int, n2 : int) -> int:
         """Returns the least common multiple of two integers."""
 
         return (n1 // fraction._gcd(n1, n2)) * n2
@@ -111,7 +111,6 @@ class fraction:
         if isinstance(other, fraction):
             d = fraction._lcm(self.denom, other.denom)
             n2 = (d // other.denom) * other.numer
-
         elif isinstance(other, int):
             d = self.denom
             n2 = other * d
@@ -227,10 +226,3 @@ class fraction:
 
     def __bool__(self):
         return self.numer != 0
-
-if __name__ == "__main__":
-    # Tests
-    a = fraction(3,4)
-    b = fraction(4,3)
-    a += b
-    print(a)
