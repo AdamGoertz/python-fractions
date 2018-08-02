@@ -17,15 +17,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 class fraction:
     def __init__(self, numer, denom=1):
-        if not (isinstance(numer, int) and isinstance(denom, int)):
-            raise TypeError("fraction objects must be instatiated with integer arguments.")
 
         if (denom == 0):
             raise ValueError("denominator cannot be 0.")
 
-        else:
+        if (isinstance(numer, int) and isinstance(denom, int)):
             self.numer = numer
             self.denom = denom
+
+        elif (isinstance(numer, fraction) or isinstance(denom, fraction)):
+            f = numer / denom
+            self.numer = f.numer
+            self.denom = f.denom
+
+        else:
+            raise TypeError("invalid argument type(s) in constructor: must be types 'int' or 'fraction'.")
+
 
     def __repr__(self):
         return f'fraction({self.numer}, {self.denom})'
@@ -42,25 +49,23 @@ class fraction:
         while (decimal // 1) != decimal:
             decimal *= 10
             magnitude *= 10
+
         return fraction(int(decimal), magnitude).simplify()
 
-    @staticmethod
-    def to_float(frac):
+
+    def to_float(self):
         """Converts a fraction object to floating-point representation."""
 
-        if isinstance(fracion, frac):
-            return frac.numer / frac.denom
-        else:
-            raise TypeError("argument must be of type 'fraction'.")
+        return self.numer / self.denom
 
-    @staticmethod
-    def get_proper(frac):
+
+    def get_proper(self):
         """Returns the fraction as a tuple containing an integer and a proper fraction."""
 
-        coeff = frac.numer // frac.denom
-        pfrac = frac.numer % frac.denom
+        coeff = self.numer // self.denom
+        pfrac = self.numer % self.denom
 
-        return (coeff, fraction(pfrac, abs(frac.denom)).simplify())
+        return (coeff, fraction(pfrac, abs(self.denom)).simplify())
 
     @staticmethod
     def _gcd(n1, n2):
@@ -121,7 +126,7 @@ class fraction:
         return self + other
 
     def __iadd__(self, other):
-        self = self + other
+        return self + other
 
     # Subtraction ==============================================================
 
@@ -132,7 +137,7 @@ class fraction:
         return (self * -1) + other
 
     def __isub__(self, other):
-        self = self - other
+        return self - other
 
     # Multiplication ===========================================================
 
@@ -148,18 +153,24 @@ class fraction:
         return self * other
 
     def __imul__(self, other):
-        self = self * other
+        return self * other
+
 
     # Division =================================================================
 
     def __truediv__(self, other):
-        return self * other.reciprocal()
+        if (isinstance(other, fraction)):
+            return self * other.reciprocal()
+        elif (isinstance(other, int)):
+            return self * fraction(1, other)
+        else:
+            raise TypeError("operands must be of type 'fraction' or 'int'.")
 
     def __rtruediv__(self, other):
         return self.reciprocal() * other
 
     def __itruediv__(self, other):
-        self = self / other
+        return self / other
 
     # Other ====================================================================
 
@@ -175,29 +186,19 @@ class fraction:
     def __int__(self):
         return self.numer // self.denom
 
-    def __round__(self):
-        return int(self)
+    def __round__(self, numDigits=0):
+        return round(self.numer / self.denom, numDigits)
 
-    def __ceil__(self):
-        if self.numer % self.denom == 0:
-            return int(self)
-        else:
-            return int(self) + 1
-
-    def __floor__(self):
-        return int(self)
 
     # Comparisons ==============================================================
-    # It isn't strictly necessary to implement ALL of these methods, as some
-    # will be defined automatically, for example x < y <==> y > x
 
     def __eq__(self, other):
         if isinstance(other, fraction):
             return (self.numer * other.denom) == (self.denom * other.numer)
-        elif isinstance(other, int):
-            return (self.numer // self.denom) == other
+        elif isinstance(other, int) or isinstance(other, float):
+            return (self.numer / self.denom) == other
         else:
-            raise TypeError("operands must be of type 'fraction' or 'int'.")
+            raise TypeError("operands must be of type 'fraction', 'float', or 'int'.")
 
     def __ne__(self, other):
         return not (self == other)
@@ -205,10 +206,10 @@ class fraction:
     def __lt__(self, other):
         if isinstance(other, fraction):
             return (self.numer * other.denom) < (self.denom * other.numer)
-        elif isinstance(other, int):
-            return (self.numer // self.denom) < other
+        elif isinstance(other, int) or isinstance(other, float):
+            return (self.numer / self.denom) < other
         else:
-            raise TypeError("operands must be of type 'fraction' or 'int'.")
+            raise TypeError("operands must be of type 'fraction', 'float', or 'int'.")
 
     def __le__(self, other):
         return self < other or self == other
@@ -216,13 +217,20 @@ class fraction:
     def __gt__(self, other):
         if isinstance(other, fraction):
             return (self.numer * other.denom) > (self.denom * other.numer)
-        elif isinstance(other, int):
-            return (self.numer // self.denom) > other
+        elif isinstance(other, int) or isinstance(other, float):
+            return (self.numer / self.denom) > other
         else:
-            raise TypeError("operands must be of type 'fraction' or 'int'.")
+            raise TypeError("operands must be of type 'fraction', 'float', or 'int'.")
 
     def __ge__(self, other):
         return self > other or self == other
 
     def __bool__(self):
         return self.numer != 0
+
+if __name__ == "__main__":
+    # Tests
+    a = fraction(3,4)
+    b = fraction(4,3)
+    a += b
+    print(a)
