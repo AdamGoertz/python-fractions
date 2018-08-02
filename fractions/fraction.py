@@ -17,6 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 class fraction:
     def __init__(self, numer, denom=1):
+        """Instatiates a fraction object.
+
+        Arguments:
+            numerator : int, fraction
+            denominator : int, fraction (default = 1)
+        """
 
         if (denom == 0):
             raise ValueError("denominator cannot be 0.")
@@ -94,11 +100,15 @@ class fraction:
         return (n1 // fraction._gcd(n1, n2)) * n2
 
 
-    def reciprocal(self):
+    def reciprocal(self) -> 'fraction':
+        """Returns the reciprocal of a fraction object."""
+
         return fraction(self.denom, self.numer)
 
 
-    def simplify(self):
+    def simplify(self) -> 'fraction':
+        """Returns the calling fraction in its lowest terms."""
+
         gcd = fraction._gcd(self.numer, self.denom)
 
         return fraction(self.numer // gcd, self.denom // gcd)
