@@ -1,4 +1,4 @@
-# Python Fractions
+# fractions -- Python 3.5+
 
 Creates a fraction data type for use with Python 3.5+.
 
@@ -8,11 +8,11 @@ Copy the 'fractions' file to the 'Lib' folder in your Python 3.5+ installation.
 
 Import the module using
 
-    import fractions.fraction
+    import fractions
 
 fraction objects can be instantiated using
 
-    fraction(numerator, denominator)
+    fractions.fraction(numerator, denominator)
 
 fraction objects support all relevant arithmetic and comparison operators, as well as methods to simplify and convert between floating point numbers and fractional representations.
 
