@@ -1,4 +1,4 @@
-# Python Fractions
+# fractions -- Python 3.5+
 
 Creates a fraction data type for use with Python 3.5+.
 
